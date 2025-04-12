@@ -24,8 +24,8 @@ client.once('ready', () => {
   
     // Ping immediately and then every 10 minutes
     pingAndSend();
-    setInterval(pingAndSend, 1 * 1 * 5000);
-    //setInterval(pingAndSend, 10 * 60 * 1000);
+    //setInterval(pingAndSend, 1 * 1 * 5000);
+    setInterval(pingAndSend, 10 * 60 * 1000);
   });
   
 
