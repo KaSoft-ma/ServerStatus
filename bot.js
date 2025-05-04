@@ -1,6 +1,4 @@
 require('dotenv').config();
-const { Client, GatewayIntentBits } = require('discord.js');
-const { checkSqlConnection } = require('./sqlChecker');
 
 const express = require('express');
 const app = express();
@@ -13,6 +11,9 @@ app.get('/', (_req, res) => {
 app.listen(port, () => {
   console.log(`✅ Heartbeat server running on port ${port}`);
 });
+
+const { Client, GatewayIntentBits } = require('discord.js');
+const { checkSqlConnection } = require('./sqlChecker');
 
 const client = new Client({
     intents: [GatewayIntentBits.Guilds],
