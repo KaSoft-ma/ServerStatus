@@ -10,19 +10,7 @@ app.listen(port, () => {
   console.log(`✅ Heartbeat server running on port ${port}`);
 });
 
-/*require('dotenv').config();
-
-const express = require('express');
-const app = express();
-const port = process.env.PORT || 3000;
-
-app.get('/', (_req, res) => {
-  res.send('bot-alive');
-});
-
-app.listen(port, () => {
-  console.log(`✅ Heartbeat server running on port ${port}`);
-});
+require('dotenv').config();
 
 const { Client, GatewayIntentBits } = require('discord.js');
 const { checkSqlConnection } = require('./sqlChecker');
@@ -67,4 +55,3 @@ process.on('unhandledRejection', (reason) => {
 process.on('uncaughtException', (err) => {
   console.error('❗ Uncaught Exception:', err);
 });
-*/// redeploy 05/04/2025 19:17:19
