@@ -23,13 +23,18 @@ client.once('ready', () => {
     console.log(`Logged in as ${client.user.tag}`);
   
     const pingAndSend = async () => {
-      const result = await checkSqlConnection();
-      const channel = await client.channels.fetch(process.env.DISCORD_CHANNEL_ID);
-  
-      if (result.success) {
-        //channel.send(`✅ SQL Server is online - ${new Date().toLocaleString()}`);
-      } else {
-        channel.send(`❌ SQL Server DOWN - ${new Date().toLocaleString()}\n<@&1359949894382518523>\n\`\`\`${result.message}\`\`\``);
+      try{
+        const result = await checkSqlConnection();
+        const channel = await client.channels.fetch(process.env.DISCORD_CHANNEL_ID);
+    
+        if (result.success) {
+          //channel.send(`✅ SQL Server is online - ${new Date().toLocaleString()}`);
+        } else {
+          channel.send(`❌ SQL Server DOWN - ${new Date().toLocaleString()}\n<@&1359949894382518523>\n\`\`\`${result.message}\`\`\``);
+        }
+      }
+      catch (err) {
+        console.error('💥 Error during ping or message send:', err.message || err);
       }
     };
   
@@ -41,3 +46,12 @@ client.once('ready', () => {
   
 
 client.login(process.env.DISCORD_BOT_TOKEN);
+
+
+process.on('unhandledRejection', (reason) => {
+  console.error('❗ Unhandled Promise Rejection:', reason);
+});
+
+process.on('uncaughtException', (err) => {
+  console.error('❗ Uncaught Exception:', err);
+});
