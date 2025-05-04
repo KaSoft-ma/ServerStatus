@@ -1,4 +1,16 @@
-require('dotenv').config();
+const express = require('express');
+const app = express();
+const port = process.env.PORT || 3000;
+
+app.get('/', (_req, res) => {
+  res.send('bot-alive');
+});
+
+app.listen(port, () => {
+  console.log(`✅ Heartbeat server running on port ${port}`);
+});
+
+/*require('dotenv').config();
 
 const express = require('express');
 const app = express();
@@ -55,3 +67,4 @@ process.on('unhandledRejection', (reason) => {
 process.on('uncaughtException', (err) => {
   console.error('❗ Uncaught Exception:', err);
 });
+*/
