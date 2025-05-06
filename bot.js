@@ -2,8 +2,27 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000;
 
+app.use(express.json());
+
 app.get('/', (_req, res) => {
   res.send('bot-alive');
+});
+
+app.post('/send', async (req, res) => {
+  const { content } = req.body;
+
+  if (!content) {
+    return res.status(400).json({ error: "Missing 'content' in request body" });
+  }
+
+  try {
+    const channel = await client.channels.fetch(process.env.DISCORD_CHANNEL_ID);
+    await channel.send(content);
+    res.status(200).json({ status: 'Message sent' });
+  } catch (err) {
+    console.error('Error sending message:', err.message || err);
+    res.status(500).json({ error: 'Failed to send message' });
+  }
 });
 
 app.listen(port, () => {
